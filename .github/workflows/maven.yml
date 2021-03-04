@@ -14,6 +14,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 14
@@ -22,3 +23,11 @@ jobs:
         java-version: 14
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+     - name: install ssh key
+       uses: webfactory/ssh-agent@v0.4.1
+       with:
+              ssh-private-key: ${{ secrets.BUILDACTION }}
+     - name: create .ssh/known_hosts
+       run: |
+           ssh-keyscan -H -t rsa -v 130.61.157.111  >> ~/.ssh/known_hosts
