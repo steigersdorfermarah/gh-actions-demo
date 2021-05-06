@@ -28,6 +28,5 @@ jobs:
           ssh-keyscan -H -t rsa -v ${{ secrets.ORAVM_IP }}  >> ~/.ssh/known_hosts
       - name: copy binaries to oravm
         run: |
-          echo "Hallo ich bin hier"
           ls -l target/
           scp target/gh-actions-demo-1.0.0-SNAPSHOT-runner.jar ${{ secrets.ORAVM_USER }}@${{ secrets.ORAVM_IP }}:
